@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,400i,500");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+.container {
+  width: 90%;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+/*Device Status*/
+.device-status {
+  width: 300px;
+  height: auto;
+  padding: 1em;
+  background-color: aqua;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}

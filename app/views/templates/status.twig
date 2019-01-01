@@ -1,0 +1,20 @@
+{% extends 'navigation.twig' %}
+{% block body %}
+    <section>
+    <div class="container">
+        <div class="col">
+            <div class="device-status">
+                <div class="status">
+                    <p>Fan: {{ status }}<p>
+                    <p>Temperature: {{ temp }}<p>
+                    <p>Switch 1:{{ sw1 }}<p>
+                    <p>Switch 2:{{ sw2 }}<p>
+                    <p>Switch 3:{{ sw3 }}<p>
+                    <p>Switch 4:<p>
+                    <p>Keypad:{{ keypad }}<p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+{% endblock %}

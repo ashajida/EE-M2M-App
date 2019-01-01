@@ -1,0 +1,32 @@
+{% extends 'navigation.twig' %}
+    {% block body %}
+        <section>
+            <div class="container">
+                  <h1>Homepage</h2>
+                <div class="device">
+                    <h2>Telecom Device</h2>
+                    <form method="post" action="index.php/send">
+                        <label for="keypad">Keypad</label>
+                        <input type="text" id="keypad" name="keypad"></br>
+                        <label for="switch-1">Switches 1</label>
+                        <input id="switch-1" value="On" name="switch-1" type="radio">On
+                        <input id="switch-1" value="Off" name="switch-1" type="radio">Off</br>
+                        <label for="switch-2">Switches 2</label>
+                        <input id="switch-2" value="On" name="switch-2" type="radio">On
+                        <input id="switch-2" value="Off" name="switch-2" type="radio">Off</br>
+                        <label for="switch-3">Switches 3</label>
+                         <input id="switch-3" value="On" name="switch-3" type="radio">On
+                             <input id="switch-3" value="Off" name="switch-3" type="radio">Off</br>
+                        <label for="fan">Fan</label>
+                        <input id="fan" value="On" name="fan" type="radio">On
+                        <input id="fan" value="Off" name="fan" type="radio">Off
+                            
+                        </select></br>
+                        <label for="temperature">Temperature</label>
+                        <input type="text" id="temperature" name="temperature"></br>
+                        <input type="submit" placeholder="submit">
+                    </form>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
