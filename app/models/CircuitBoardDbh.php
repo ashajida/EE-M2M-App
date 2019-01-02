@@ -38,31 +38,34 @@ class CircuitBoardDbh
 		return $boards;
 	}
 
-    public function updateBoardStatus($status)
+    public function updateBoardStatus($msisdn, $status)
     {
+		$query = 'REPLACE INTO board_status SET switchOne = :switchOne, switchTwo = :switchTwo,
+		switchThree = :switchThreee, switchFour = :switchFour, fan = :fan, 
+		temperature = :temperature, keypad = :keypad, date = :date,
+		msisdn = :msisdn';
+
 		try 
 		{
-			$query = 'REPLACE INTO board_status SET switchOne = :switchOne, switchTwo = :switchTwo,
-			switchThree = :switchThreee, switchFour = :switchFour, fan = :fan, 
-			temperature = :temperature, keypad = :keypad, date = :date,
-			msisdn = :msisdn';
-
 			$this->db->prepare($query);
 
-			$this->db->bind(':switchOne', $status->getSwitchOne, 'INT');
-			$this->db->bind(':switchTwo', $status->getSwitchTwo, 'INT');
-			$this->db->bind(':switchThree', $status->getSwitchThree, 'INT');
-			$this->db->bind(':switchFour', $status->getSwitchFour, 'INT');
-			$this->db->bind(':fan', $status->getFan, 'INT');
-			$this->db->bind(':keypad', $status->getKeypad, 'INT');
-			$this->db->bind(':tempareture', $status->getTemperature, 'INT');
-			$this->db->bind(':date', $status->getDate, 'INT');
+			$this->db->bind(':switchOne', $status->getSwitchOne(), 'STR');
+			$this->db->bind(':switchTwo', $status->getSwitchTwo(), 'STR');
+			$this->db->bind(':switchThree', $status->getSwitchThree(), 'STR');
+			$this->db->bind(':switchFour', $status->getSwitchFour(), 'STR');
+			$this->db->bind(':fan', $status->getFan(), 'STR');
+			$this->db->bind(':keypad', $status->getKeypad(), 'INT');
+			$this->db->bind(':tempareture', $status->getTemperature(), 'INT');
+			$this->db->bind(':date', $status->getDate(), 'INT');
+			$this->db->bind(':msisdn', $msisdn, 'STR');
 			
 			$this->db->execute();
+
 
 		} catch (Exception $e) 
 		{
 			//Throw Exception
+			
 		}
     }
 
@@ -75,7 +78,7 @@ class CircuitBoardDbh
 		{
 			$this->db->prepare($query);
 
-			$this->db->bind(':msisdn', '447818000000', 'STR');
+			$this->db->bind(':msisdn', '447817814149', 'STR');
 
 			$this->db->execute();
 
@@ -90,6 +93,7 @@ class CircuitBoardDbh
 			$temperature = $result['temperature'];
 			$keypad = $result['keypad'];
 
+	
 			$status = new CircuitBoardStatus($date,
 			$switchOne, $switchTwo, $switchThree, $switchFour,
 			$fan, $temperature, $keypad);

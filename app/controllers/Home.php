@@ -5,7 +5,6 @@
  * @author Ashraf Ajida 
  */
 
-require_once './models/Validator.php';
 require_once './models/CircuitBoard.php';
 require_once 'Controller.php';
 
@@ -35,10 +34,17 @@ class Home extends Controller
     public function index($request, $response, $args) 
     {
 
-        $this->circuit_board_dbh->getCircuitBoardStatus();
+        $status = $this->circuit_board_dbh->getCircuitBoardStatus();
+
 
         return $this->view->render($response, 'status.twig',[
-            'status' => $this->circuit_board_dbh->getCircuitBoardStatus()
+            'keypad'    => $status->getKeypad(),
+            'fan'       => $status->getFan(),
+            'temp'      => $status->getTemperature(),
+            's1'        => $status->getSwitchOne(),
+            's2'        => $status->getSwitchTwo(),
+            's3'        => $status->getSwitchThree(),
+            's4'        => $status->getSwitchFour(),
         ]);
     }
 
