@@ -90,9 +90,12 @@ class CircuitBoardDbh
 			$temperature = $result['temperature'];
 			$keypad = $result['keypad'];
 
+	
 			$status = new CircuitBoardStatus($date,
 			$switchOne, $switchTwo, $switchThree, $switchFour,
 			$fan, $temperature, $keypad);
+
+			echo $status->getFan();
 
 			return $status;
 
