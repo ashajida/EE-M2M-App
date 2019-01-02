@@ -82,7 +82,7 @@ class M2MConsumer
         //display device state eg switches, heater
         $username = '18p2401696';
         $password = 'Myee2010';
-        $count = 15;
+        $count = 30;
 
         return $this->client_obj->peekMessages( 
             $username, 
@@ -91,9 +91,5 @@ class M2MConsumer
         );
     
     }
-
-    public function deliveryReport()
-    {}
-
     
 }

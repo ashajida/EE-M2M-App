@@ -6,9 +6,9 @@
  */
 
 
-require_once 'Controller.php';
-
+require_once __DIR__ . '/Controller.php';
 require_once './models/Validator.php';
+require_once './models/CircuitBoardStatus.php';
 
 
 class UpdateStatus extends Controller
@@ -34,14 +34,19 @@ class UpdateStatus extends Controller
 		foreach ($messages as $message) {
 
             $this->xml_parser->parse($message);
+
+            $parsedMessage = $this->xml_parser->getParsedData();
             
-			$parsedMessage = $this->xml_parser->getParsedData();
-
             $validator = new Validator($parsedMessage);
-      
-			try {
-
+            
+			
+                try{
                 $msisdn = $validator->validateMSISDN();
+                } catch(Exception $e)
+                {
+
+                }
+                
                 
                 $status = $validator->validateStatus();
 
@@ -49,12 +54,10 @@ class UpdateStatus extends Controller
 
 				// $update = new CircuitBoard($information, $status);
 
-                // $database->updateBoardStatus($msisdn, $status);
+                $this->circuit_board_dbh->updateBoardStatus('447817814149', $status);
                 
 				// $this->model->addUpdate($update);
-			} catch (Exception $e) {
-				continue;
-			}
+			
 		}
 
       

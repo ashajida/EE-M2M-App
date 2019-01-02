@@ -5,7 +5,6 @@
  * @author Ashraf Ajida 
  */
 
-require_once './models/Validator.php';
 require_once './models/CircuitBoard.php';
 require_once 'Controller.php';
 
@@ -36,6 +35,7 @@ class Home extends Controller
     {
 
         $status = $this->circuit_board_dbh->getCircuitBoardStatus();
+
 
         return $this->view->render($response, 'status.twig',[
             'keypad'    => $status->getKeypad(),
