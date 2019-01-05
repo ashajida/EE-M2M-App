@@ -77,9 +77,6 @@ class M2MConsumer
 
     public function getMessages()
     {
-        //Validate all message from the server
-        //store message in a database
-        //display device state eg switches, heater
         $username = '18p2401696';
         $password = 'Myee2010';
         $count = 30;
