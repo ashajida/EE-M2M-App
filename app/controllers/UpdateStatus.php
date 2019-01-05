@@ -36,25 +36,43 @@ class UpdateStatus extends Controller
             $this->xml_parser->parse($message);
 
             $parsedMessage = $this->xml_parser->getParsedData();
+
+            print_r($parsedMessage);
+
+            if($parsedMessage['GROUPID'] === '18-3110-AM')
+            {
+               $validator = new Validator($parsedMessage);
+               $status = $validator->validateStatus();
+               $this->circuit_board_dbh->updateBoardStatus('447817814149', $status);
+              
+            } else {
+                echo 'NULL';
+            }
+
+            header('Location: http://localhost/soap_app/app/');
+
+           
+
             
-            $validator = new Validator($parsedMessage);
+            
+            
             
 			
-                try{
-                $msisdn = $validator->validateMSISDN();
-                } catch(Exception $e)
-                {
+                // try{
+                // $msisdn = $validator->validateMSISDN();
+                // } catch(Exception $e)
+                // {
 
-                }
+                // }
                 
                 
-                $status = $validator->validateStatus();
+                
 
 				// $information = $database->queryBoardInformation($msisdn);
 
 				// $update = new CircuitBoard($information, $status);
 
-                $this->circuit_board_dbh->updateBoardStatus('447817814149', $status);
+                
                 
 				// $this->model->addUpdate($update);
 			

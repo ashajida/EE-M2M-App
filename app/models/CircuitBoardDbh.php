@@ -40,10 +40,10 @@ class CircuitBoardDbh
 
     public function updateBoardStatus($msisdn, $status)
     {
-		$query = 'REPLACE INTO board_status SET switchOne = :switchOne, switchTwo = :switchTwo,
-		switchThree = :switchThreee, switchFour = :switchFour, fan = :fan, 
+		$query = 'UPDATE board_status SET switchOne = :switchOne, switchTwo = :switchTwo,
+		switchThree = :switchThree, switchFour = :switchFour, fan = :fan, 
 		temperature = :temperature, keypad = :keypad, date = :date,
-		msisdn = :msisdn';
+		msisdn = :msisdn WHERE id = :id';
 
 		try 
 		{
@@ -55,8 +55,9 @@ class CircuitBoardDbh
 			$this->db->bind(':switchFour', $status->getSwitchFour(), 'STR');
 			$this->db->bind(':fan', $status->getFan(), 'STR');
 			$this->db->bind(':keypad', $status->getKeypad(), 'INT');
-			$this->db->bind(':tempareture', $status->getTemperature(), 'INT');
+			$this->db->bind(':temperature', $status->getTemperature(), 'INT');
 			$this->db->bind(':date', $status->getDate(), 'INT');
+			$this->db->bind(':id', 3, 'INT');
 			$this->db->bind(':msisdn', $msisdn, 'STR');
 			
 			$this->db->execute();
