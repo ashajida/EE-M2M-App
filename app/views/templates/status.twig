@@ -5,13 +5,30 @@
         <div class="col">
             <div class="device-status">
                 <div class="status">
-                    <p>Keypad:{{ keypad }}<p>
-                    <p>Fan: {{ fan }}<p>
-                    <p>Temperature: {{ temp }}<p>
-                    <p>Switch 1:{{ s1 }}<p>
-                    <p>Switch 2:{{ s2 }}<p>
-                    <p>Switch 3:{{ s3 }}<p>
-                    <p>Switch 4:{{ s4 }}<p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Switch One</th>
+                                <th>Switch Two</th>
+                                <th>Switch Three</th>
+                                <th>Switch Four</th>
+                                <th>Keypad</th>
+                                <th>Fan</th>
+                                <th>Temperature</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ s1 }}</td>
+                                <td>{{ s2 }}</td>
+                                <td>{{ s3 }}</td>
+                                <td>{{ s4 }}</td>
+                                <td>{{ keypad }}</td>
+                                <td>{{ fan }}</td>
+                                <td>{{ temp }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
