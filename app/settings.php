@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . '/controllers/home.php';
-require __DIR__ . '/controllers/login.php';
+require __DIR__ . '/controllers/loginController.php';
 require __DIR__ . '/controllers/register.php';
 require __DIR__ . '/controllers/status.php';
 require __DIR__ . '/controllers/UpdateStatus.php';
@@ -73,6 +73,10 @@ $container['RegisterController'] = function ($container) {
 
 $container['UpdateStatus'] = function ($container) {
     return new UpdateStatus($container);
+};
+
+$container['LoginController'] = function ($container) {
+    return new LoginController($container);
 };
 
 $container['M2MConsumer'] = function ($container) {
