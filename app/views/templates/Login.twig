@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Log In</title>
-</head>
-<body>
+{% extends 'navigation.twig' %}
     {% block body %}
-        <h1>Log In</h2>
+        <section class="section-login">
+            <h2>Login</h2>
+            <div class="container">
+                <div class="form-group">
+                    <form action="index.php/login" method="post">
+                        <label for="username">Username<label>
+                        <input type="text" name="username" id="username"></input>
+                        <label for="password">Password<label>
+                        <input type="text" name="password" id="password"></input>
+                        <input type="submit" placeholder="Login">
+                    </form>
+                </div>
+            </div>
+        </section>
     {% endblock %}
-</body>
-</html> 
