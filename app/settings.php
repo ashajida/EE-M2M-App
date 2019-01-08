@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . '/controllers/home.php';
-require __DIR__ . '/controllers/loginController.php';
+require __DIR__ . '/controllers/LoginController.php';
 require __DIR__ . '/controllers/register.php';
 require __DIR__ . '/controllers/status.php';
 require __DIR__ . '/controllers/UpdateStatus.php';

@@ -5,6 +5,7 @@
  * @author Ashraf Ajida
  */
 
+require_once __DIR__ . '/User.php';
 
 class Login
 {
@@ -33,13 +34,15 @@ class Login
     private $db;
 
 
-    public function __construct($user, $username, $password, $db)
+    public function __construct($username, $password, $db)
     {
-        $this->user = $user;
+        $this->username = $username;
+        $this->password = $password;
         $this->db = $db;
     }
 
     /**
+     * Handles the login process
      * @return Object $user
      */
 
@@ -54,16 +57,17 @@ class Login
             $this->db->bind(':password', $this->password, 'STR');
             $this->db->execute();
 
-            $results = $this->db->getMultipleData();
+            $results = $this->db->getSingleData();
 
             if(!$results < 0) 
             {
 
-                die();
+                echo "lol";
+                
 
             } else
             {
-                $this->user = new User($result['username'], $result['password']);
+                $this->user = new User($results['username'], $results['password']);
 
                 return $this->user;
             }

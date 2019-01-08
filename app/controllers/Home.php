@@ -36,16 +36,25 @@ class Home extends Controller
 
         $status = $this->circuit_board_dbh->getCircuitBoardStatus();
 
+        $SESSION['username'] = 'user1';
 
-        return $this->view->render($response, 'status.twig',[
-            'keypad'    => $status->getKeypad(),
-            'fan'       => $status->getFan(),
-            'temp'      => $status->getTemperature(),
-            's1'        => $status->getSwitchOne(),
-            's2'        => $status->getSwitchTwo(),
-            's3'        => $status->getSwitchThree(),
-            's4'        => $status->getSwitchFour(),
-        ]);
+        if(!isset($SESSION['username']))
+        {
+            return $this->view->render($response, 'status.twig',[
+                'keypad'    => $status->getKeypad(),
+                'fan'       => $status->getFan(),
+                'temp'      => $status->getTemperature(),
+                's1'        => $status->getSwitchOne(),
+                's2'        => $status->getSwitchTwo(),
+                's3'        => $status->getSwitchThree(),
+                's4'        => $status->getSwitchFour(),
+            ]);
+        } else {
+            return $this->view->render($response, 'login.twig', [
+        
+            ]);
+        }
+        
     }
 
     /**
