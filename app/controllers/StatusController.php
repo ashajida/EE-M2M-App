@@ -3,9 +3,10 @@
 require_once __DIR__ . '/models/CircuitBoardDbh.php';
 
 /**
- * Controls a 'view statuses' action.
- * @author Michael
+ * Views the status of the 
+ * @author Ashraf Ajida
  */
+
 final class StatusesController 
 {
 	/**

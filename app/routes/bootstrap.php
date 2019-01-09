@@ -2,7 +2,8 @@
 
 $app->get('/', \HomeController::class . ':index');
 $app->get('/update', \UpdateStatus::class . ':index');
-$app->post('/auth/login', \LoginController::class . ':login');
+$app->post('/login', \LoginController::class . ':login');
+$app->get('/auth', \LoginController::class . ':index');
 
 
 

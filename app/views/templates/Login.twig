@@ -7,14 +7,17 @@
 </head>
     {% block body %}
         <section class="section-login">
-            <h2>Login</h2>
+            
             <div class="container">
                 <div class="form-group">
-                    <form action="index.php/auth/login" method="post">
-                        <label for="username">Username<label>
-                        <input type="text" name="username" id="username"></input>
-                        <label for="password">Password<label>
-                        <input type="text" name="password" id="password"></input>
+                    <div class="heading-wrapper">
+                        <h3>Login</h3>
+                    </div>
+                    <form action="login" method="post">
+                        <label for="username">Username:{{ username_err ? '<span class="error">*Please fill in username</span>' : ''}}</label></br>
+                        <input type="text" name="username" id="username" placeholder="Username"></input></br>
+                        <label for="password">Password:{{ password_err ? '<span class="error">*Please fill in password</span>' : '' }}</label></br>
+                        <input type="text" name="password" id="password" placeholder="Password"></input></br>
                         <input type="submit" placeholder="Login">
                     </form>
                 </div>
