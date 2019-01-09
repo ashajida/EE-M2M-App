@@ -6,16 +6,18 @@
  */
 
 
-class User
+class UserModel
 {
     /**
-     * @var string $username username of a user
+     * username of a user
+     * @var string 
      */
 
     private $username;
 
     /**
-     * @var string $password password of a user
+     * password of a user
+     * @var string 
      */
 
     private $password;
@@ -29,8 +31,9 @@ class User
     }
 
     /**
-     * @method $getUsername this method returns username
-     * @return string $username return username
+     * this method returns username
+     * @method $getUsername 
+     * @return string 
      */
 
     public function getUsername()

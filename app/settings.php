@@ -9,7 +9,10 @@ require __DIR__ . '/models/M2mConsumer.php';
 require __DIR__ . '/models/database.php';
 require __DIR__ . '/models/CircuitBoardDbh.php';
 require __DIR__ . '/models/XmlParser.php';
-
+require __DIR__ . '/models/LoginValidator.php';
+require __DIR__ . '/models/LoginModel.php';
+require __DIR__ . '/models/SessionWrapper.php';
+require __DIR__ . '/models/SessionModel.php';
 
 
 $configuration = [
@@ -95,6 +98,27 @@ $container['CircuitBoardDbh'] = function ($container) {
 $container['XmlParser'] = function ($container) {
     return new XmlParser($container);
 };
+
+$container['LoginValidator'] = function ($container) {
+    return new LoginValidator($container);
+};
+
+
+$container['SessionWrapper'] = function ($container) {
+    return new SessionWrapper($container);
+};
+
+
+$container['SessionModel'] = function ($container) {
+    return new SessionModel($container);
+};
+
+
+$container['LoginModel'] = function ($container) {
+    return new LoginModel($container);
+};
+
+
 
 
 

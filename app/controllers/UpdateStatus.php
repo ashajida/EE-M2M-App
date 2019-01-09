@@ -49,15 +49,8 @@ class UpdateStatus extends Controller
                 echo 'NULL';
             }
 
-            header('Location: http://localhost/soap_app/app/');
-
+        
            
-
-            
-            
-            
-            
-			
                 // try{
                 // $msisdn = $validator->validateMSISDN();
                 // } catch(Exception $e)
@@ -76,7 +69,9 @@ class UpdateStatus extends Controller
                 
 				// $this->model->addUpdate($update);
 			
-		}
+        }
+        
+        return $response->withRedirect('/soap_app/app');
 
       
     }
