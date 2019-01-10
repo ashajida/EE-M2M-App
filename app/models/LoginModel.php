@@ -11,25 +11,37 @@ class LoginModel
 {
 
     /**
-     * holds the username error string
+     * user username
      *
      * @var string
      */
 
-    private $username_error;
+    private $username;
 
     /**
-     * holds the password error string
+     * user password
      *
      * @var string
      */
 
-    private $password_error;
+    private $password;
+
+    /**
+     * database object
+     * @var Database
+     */
+
+    private $db;
+
+
+
 
     public function __construct()
     {
-       $this->username_error = false;
-       $this->password_error = false;
+       $this->username = false;
+       $this->password = false;
+       $this->db = null;
+
     }
 
     /**
@@ -40,23 +52,24 @@ class LoginModel
      * @param Object $db database object
      */
 
-    public function userLogin($username, $password, $db)
+    public function loginUser($username, $password, $db)
     {
-        $username = $username;
-        $password = $password;
-        $db = $db;
+        $this->username = $username;
+        $this->password = $password;
+        $this->db = $db;
+
         $user = null;
 
         $query = 'SELECT * FROM users WHERE password = :password AND username = :username';
 
         try
         {
-            $db->prepare($query);
-            $db->bind(':username', $username, 'STR');
-            $db->bind(':password', $password, 'STR');
-            $db->execute();
+            $this->db->prepare($query);
+            $this->db->bind(':username', $this->username, 'STR');
+            $this->db->bind(':password', $this->password, 'STR');
+            $this->db->execute();
 
-            $results = $db->getSingleData();
+            $results = $this->db->getSingleData();
 
             if(!$results < 0) 
             {

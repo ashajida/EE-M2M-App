@@ -29,9 +29,16 @@ class LoginController extends Controller
     /**
      * login validator Object
      *
-     * @var LoginValidator
+     * @var StringValidator
      */
-    private $login_validator;
+    private $string_validator;
+
+    /**
+     * form validator model
+     * @var FormValidator
+     */
+
+    private $form_validator;
 
     /**
      * session model object
@@ -51,17 +58,23 @@ class LoginController extends Controller
 
     private $password_error;
 
+    private $password_count_error;
+
     public function __construct($container)
     {
         parent::__construct($container);
         $this->db = $container->get('Database');
         $this->login = $container->get('LoginModel');
-        $this->login_validator = $container->get('LoginValidator');
+        $this->string_validator = $container->get('StringValidator');
+        $this->form_validator = $container->get('FormValidator');
+
         $this->session_model =  $container->get('SessionModel');
         $this->session_wrapper =  $container->get('SessionWrapper');
 
         $this->username_error = false;
         $this->password_error = false;
+        $this->password_count_error = false;
+
         
     }
 
@@ -69,10 +82,10 @@ class LoginController extends Controller
     {
        
   
-       if(isset($_SESSION))
-       {
-        return $response->withRedirect('/soap_app/app'); 
-       }
+    //    if(isset($_SESSION['user_name']))
+    //    {
+    //     return $response->withRedirect('/soap_app/app'); 
+    //    }
 
         return $this->view->render($response, 'Login.twig', [
             'password_err' => $this->password_error,
@@ -87,23 +100,13 @@ class LoginController extends Controller
 
     public function login($request, $response, $args)
     {
-  
 
         $user = null;
 
-        if(empty($request->getParam('username')))
-        {
-            $this->username_error = true;
-  
-        }
+        $this->username_error = $this->form_validator->validateUsername($request->getParam('username'));
+        $this->password_error = $this->form_validator->validatePassword($request->getParam('password'));
 
-        if(empty($request->getParam('password')))
-        {
-            $this->password_error = true;
-
-        }
-
-        if($this->password_error || $this->username_error )
+        if($this->password_error || $this->username_error || $this->password_count_error)
         {
             return $this->view->render($response, 'Login.twig', [
                 'password_err' => $this->password_error,
@@ -114,7 +117,7 @@ class LoginController extends Controller
         $username = $this->login_validator->validateString($request->getParam('username'));
         $password = $this->login_validator->validateString($request->getParam('password'));
 
-        $user = $this->login->userLogin($username, $password, $this->db);
+        $user = $this->login->loginUser($username, $password, $this->db);
 
         $this->session_model->setSessionValues($user->getUsername(), $user->getPassword());
         $this->session_model->setWrapperSessionFile($this->session_wrapper);

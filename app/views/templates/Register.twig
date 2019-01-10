@@ -1,14 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="./views/css/styles.css">
+    <title>{{ title }}</title>
 </head>
-<body>
     {% block body %}
-        <h1>Register</h2>
+        <section class="section-register">
+            
+            <div class="container">
+                <div class="form-group">
+                    <div class="heading-wrapper">
+                        <h3>Register</h3>
+                        {{ doublicated_user_err ? '<span class="doublicated-users">User already exists in the database</span>' : '' }}
+                    </div>
+                    <form action="register" method="post">
+                        <label for="username">Username:{{ username_err ? '<span class="error">*Please fill in username</span>' : ''}}</label></br>
+                        <input type="text" name="username" id="username" placeholder="Username"></input></br>
+                        <label for="password"> 
+                            Password:{{ password_err ? '<span class="error">*Please fill in password</span>' : '' }}
+                                    {{ password_count_err ? '<span class="error">*Password must be at least 8 charactors</span>' : '' }}
+                        </label></br>
+                        <input type="text" name="password" id="password" placeholder="Password"></input></br>
+                        <input type="submit" placeholder="Login">
+                    </form>
+                </div>
+            </div>
+        </section>
     {% endblock %}
-</body>
+<script src="js/app.js"></script>
+</body> 
 </html>

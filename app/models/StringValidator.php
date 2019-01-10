@@ -1,18 +1,32 @@
 <?php
 
 /**
- * Login Validator
+ * String Validator
  * @author Ashraf Ajida
  */
 
- class LoginValidator
+ class StringValidator
  {
+
+    /**
+     * validated string
+     *
+     * @var string 
+     */
 
     private $validatedString;
 
     public function __construct()
     {}
     
+
+    /**
+     * this function validates the string
+     *
+     * @param string $string
+     * @return string
+     */
+
     public function validateString($string)
     {
 
