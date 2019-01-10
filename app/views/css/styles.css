@@ -31,7 +31,8 @@ nav {
   flex-direction: column;
 }
 
-nav a {
+nav a,
+span {
   text-decoration: none;
   color: #e4e4e4;
   font-size: 14px;
@@ -42,6 +43,22 @@ nav a {
 
 nav a:hover {
   color: #bbbbbb;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  display: block;
+}
+
+li :hover ul {
+  display: block;
+}
+
+li .drop-down {
+  display: none;
 }
 
 header {
@@ -178,7 +195,8 @@ h3 {
     flex-direction: row;
   }
 
-  nav a {
+  nav a,
+  span {
     text-decoration: none;
     color: #e4e4e4;
     font-size: 14px;

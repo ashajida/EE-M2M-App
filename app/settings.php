@@ -2,6 +2,7 @@
 
 require __DIR__ . '/controllers/home.php';
 require __DIR__ . '/controllers/LoginController.php';
+require __DIR__ . '/controllers/RegisterController.php';
 require __DIR__ . '/controllers/register.php';
 require __DIR__ . '/controllers/status.php';
 require __DIR__ . '/controllers/UpdateStatus.php';
@@ -9,8 +10,10 @@ require __DIR__ . '/models/M2mConsumer.php';
 require __DIR__ . '/models/database.php';
 require __DIR__ . '/models/CircuitBoardDbh.php';
 require __DIR__ . '/models/XmlParser.php';
-require __DIR__ . '/models/LoginValidator.php';
+require __DIR__ . '/models/StringValidator.php';
+require __DIR__ . '/models/FormValidator.php';
 require __DIR__ . '/models/LoginModel.php';
+require __DIR__ . '/models/RegisterModel.php';
 require __DIR__ . '/models/SessionWrapper.php';
 require __DIR__ . '/models/SessionModel.php';
 
@@ -71,7 +74,7 @@ $container['StatusController'] = function ($container) {
 };
 
 $container['RegisterController'] = function ($container) {
-    return new Register($container);
+    return new RegisterController($container);
 };
 
 $container['UpdateStatus'] = function ($container) {
@@ -99,8 +102,12 @@ $container['XmlParser'] = function ($container) {
     return new XmlParser($container);
 };
 
-$container['LoginValidator'] = function ($container) {
-    return new LoginValidator($container);
+$container['StringValidator'] = function ($container) {
+    return new StringValidator($container);
+};
+
+$container['FormValidator'] = function ($container) {
+    return new FormValidator($container);
 };
 
 
@@ -116,6 +123,10 @@ $container['SessionModel'] = function ($container) {
 
 $container['LoginModel'] = function ($container) {
     return new LoginModel($container);
+};
+
+$container['RegisterModel'] = function ($container) {
+    return new RegisterModel($container);
 };
 
 
