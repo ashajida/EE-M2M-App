@@ -52,6 +52,9 @@ class LoginModel
 
     }
 
+    public function __destruct()
+    {}
+        
     /**
      * Handles the login process
      * @return Object 

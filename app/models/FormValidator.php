@@ -34,6 +34,9 @@ class FormValidator
         $this->is_password_len_validated = false;
     }
 
+    public function __destruct()
+    {}
+
     /**
      * this function validates username input
      *

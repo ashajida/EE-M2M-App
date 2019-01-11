@@ -5,6 +5,11 @@ require_once __DIR__ . '/CircuitBoardStatus.php';
 
 class CircuitBoardDbh
 {
+	/**
+	 * this is the database class
+	 *
+	 * @var Database
+	 */
     private $db;
 
     public function __construct($container)
@@ -85,7 +90,7 @@ class CircuitBoardDbh
 
 			$result = $this->db->getSingleData();
 
-			$date = '0000000';
+			$date = $result['date'];
 			$switchOne = $result['switchOne'];
 			$switchTwo = $result['switchTwo'];
 			$switchThree = $result['switchThree'];
