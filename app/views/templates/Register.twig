@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <div class="heading-wrapper">
                         <h3>Register</h3>
-                        {{ doublicated_user_err ? '<span class="doublicated-users">User already exists in the database</span>' : '' }}
+                        {{ doublicated_user_err ? '<p class="primary-error">*User already exists in the database, please try again</p>' : '' }}
                     </div>
                     <form action="register" method="post">
                         <label for="username">Username:{{ username_err ? '<span class="error">*Please fill in username</span>' : ''}}</label></br>
@@ -22,7 +22,7 @@
                                     {{ password_count_err ? '<span class="error">*Password must be at least 8 charactors</span>' : '' }}
                         </label></br>
                         <input type="text" name="password" id="password" placeholder="Password"></input></br>
-                        <input type="submit" placeholder="Login">
+                        <input type="submit" value="Register">
                     </form>
                 </div>
             </div>

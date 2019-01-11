@@ -148,6 +148,10 @@ td:nth-of-type(7):before {
   padding: 1em;
   width: 310px;
   background-color: #fdfbfb;
+  position: absolute;
+  transform: translate(50%, -50%);
+  right: 50%;
+  top: 50%;
 }
 
 input {
@@ -178,7 +182,15 @@ label {
 
 label .error {
   margin-left: 1em;
-  color: red;
+  color: #ff0000;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.heading-wrapper .primary-error {
+  margin-bottom: 1em;
+  color: #ff0000;
+  font-size: 0.8em;
 }
 
 h3 {
@@ -210,6 +222,13 @@ h3 {
     text-align: center;
     padding: 1em;
   } */
+
+  .form-group {
+    margin: 0 auto;
+    padding: 1em;
+    width: 500px;
+    background-color: #fdfbfb;
+  }
 
 
 }

@@ -12,13 +12,17 @@
                 <div class="form-group">
                     <div class="heading-wrapper">
                         <h3>Login</h3>
+                        {{ password_match_err ? '<p class="primary-error">*Incorrect assword or username, please try again</p>' : '' }}
+                        {{ user_not_found_err ? '<p class="primary-error">*Incorrect password or username, please try again</p>' : '' }}
                     </div>
                     <form action="login" method="post">
-                        <label for="username">Username:{{ username_err ? '<span class="error">*Please fill in username</span>' : ''}}</label></br>
+                        <label for="username">Username:{{ username_err ? '<p class="error">*Please fill in username</p>' : ''}}</label></br>
                         <input type="text" name="username" id="username" placeholder="Username"></input></br>
-                        <label for="password">Password:{{ password_err ? '<span class="error">*Please fill in password</span>' : '' }}</label></br>
+                        <label for="password">Password:
+                            {{ password_err ? '<p class="error">*Please fill in password</p>' : '' }}
+                        </label></br>
                         <input type="text" name="password" id="password" placeholder="Password"></input></br>
-                        <input type="submit" placeholder="Login">
+                        <input type="submit" value="Login">
                     </form>
                 </div>
             </div>

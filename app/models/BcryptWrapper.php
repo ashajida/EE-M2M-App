@@ -13,7 +13,7 @@ class BcryptWrapper
 
   public function __destruct(){}
 
-  public function create_hashed_password($string_to_hash)
+  public function createHashedPassword($string_to_hash)
   {
     $password_to_hash = $string_to_hash;
     $bcrypt_hashed_password = '';
