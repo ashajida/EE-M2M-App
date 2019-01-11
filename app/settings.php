@@ -2,8 +2,8 @@
 
 require __DIR__ . '/controllers/home.php';
 require __DIR__ . '/controllers/LoginController.php';
+require __DIR__ . '/controllers/LogoutController.php';
 require __DIR__ . '/controllers/RegisterController.php';
-require __DIR__ . '/controllers/register.php';
 require __DIR__ . '/controllers/status.php';
 require __DIR__ . '/controllers/UpdateStatus.php';
 require __DIR__ . '/models/M2mConsumer.php';
@@ -57,6 +57,11 @@ define('USERNAME', $db_username);
 define('PASSWORD', $db_password);
 define('WSDL', $wsdl);
 
+define('SMS_IDENTIFIER', 'abc123'); 
+
+define('TIMEZONE', 'UTC'); 
+define('DATE_FORMAT', 'd/m/Y H:i:s');
+
 
 
 
@@ -67,6 +72,10 @@ $container['HomeController'] = function ($container) {
 
 $container['LoginController'] = function ($container) {
     return new Login($container);
+};
+
+$container['LogoutController'] = function ($container) {
+    return new LogoutController($container);
 };
 
 $container['StatusController'] = function ($container) {

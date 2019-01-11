@@ -20,11 +20,14 @@ class Database
 
         try {
             $this->dbh = new PDO($dns, USERNAME, PASSWORD, $options);
-        } catch(Exception $exception)
+        } catch(PDOException $exception)
         {
-            echo $exception->getMessage();
+            //Throw Exception
         }
     }
+
+    public function __destruct()
+    {}
 
 
     public function getMultipleData()

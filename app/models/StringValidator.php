@@ -23,7 +23,7 @@
     /**
      * this function validates the string
      *
-     * @param string $string
+     * @param string $string this is the string to validate
      * @return string
      */
 

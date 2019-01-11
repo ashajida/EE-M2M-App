@@ -72,6 +72,9 @@ class RegisterController extends Controller
         
     }
 
+    public function __destruct()
+    {}
+
     public function index($request, $response, $args) 
     {
        

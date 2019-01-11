@@ -66,25 +66,25 @@ final class Validator
 	 * @return DateTime The validated date object.
 	 * @throws Exception If an error occurs during sanitisation/validation.
 	 */
-	// public function validateDate()
-	// {
-	// 	$key = 'RECEIVEDTIME';
+	public function validateDate()
+	{
+		$key = 'RECEIVEDTIME';
 
-	// 	$receivedTime = $this->getValue($key);
-	// 	$receivedTime = filter_var($receivedTime, FILTER_SANITIZE_STRING);
+		$receivedTime = $this->getValue($key);
+		$receivedTime = filter_var($receivedTime, FILTER_SANITIZE_STRING);
 
-	// 	if ($receivedTime === false) {
-	// 		throw new FilterException($key);
-	// 	}
+		if ($receivedTime === false) {
+			throw new FilterException($key);
+		}
 
-	// 	$date = DateTime::createFromFormat(DATE_FORMAT, $receivedTime);
+		$date = DateTime::createFromFormat(DATE_FORMAT, $receivedTime);
 
-	// 	if ($date === false) {
-	// 		throw new InvalidDateException($key);
-	// 	}
+		if ($date === false) {
+			throw new InvalidDateException($key);
+		}
 
-	// 	return $date;
-	// }
+		return $date;
+	}
 
 	/**
 	 * Validates the bearer field.
@@ -194,20 +194,20 @@ final class Validator
 	 * @return string The validated temperature.
 	 * @throws Exception If an error occurs during sanitisation/validation.
 	 */
-	// public function validateTemperature()
-	// {
-	// 	$key = 'T';
+	public function validateTemperature()
+	{
+		$key = 'T';
 
-	// 	$temperature = $this->getValue($key);
-	// 	$temperature = filter_var($temperature, FILTER_SANITIZE_NUMBER_INT);
-	// 	$temperature = filter_var($temperature, FILTER_VALIDATE_INT, array('options' => array('min_range' => -99, 'max_range' => 999))); // 3 max digits at all times
+		$temperature = $this->getValue($key);
+		$temperature = filter_var($temperature, FILTER_SANITIZE_NUMBER_INT);
+		$temperature = filter_var($temperature, FILTER_VALIDATE_INT, array('options' => array('min_range' => -99, 'max_range' => 999))); // 3 max digits at all times
 
-	// 	if ($temperature === false) {
-	// 		throw new FilterException($key);
-	// 	}
+		if ($temperature === false) {
+			throw new FilterException($key);
+		}
 
-	// 	return (int)$temperature;
-	// }
+		return (int)$temperature;
+	}
 
 	/**
 	 * Sanitizes and validates the keypad input.
@@ -235,15 +235,14 @@ final class Validator
 	 */
 	public function validateStatus()
 	{
-		$date = 222;
-		$this->validateBearer();
+		$date = $this->validateDate();
+		$bearer = $this->validateBearer();
 		$switchOne = $this->validateSwitch(1);
 		$switchTwo = $this->validateSwitch(2);
 		$switchThree = $this->validateSwitch(3);
 		$switchFour = $this->validateSwitch(4);
 		$fan = $this->validateFan();
-		$temperature = 12;
-		//$this->validateTemperature();
+		$temperature = $this->validateTemperature();
 		$keypad = $this->validateKeypad();
 
 		$status = new CircuitBoardStatus($date,

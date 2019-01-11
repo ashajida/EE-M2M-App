@@ -15,6 +15,9 @@ class Status
 
     }
 
+    public function __destruct()
+    {}
+        
     /**
      * @method $index
      * @param [object] $request

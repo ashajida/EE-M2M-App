@@ -19,6 +19,9 @@ class UpdateStatus extends Controller
         parent::__construct($container);
     }
 
+    public function __destruct()
+    {}
+
     /**
      * @method $index
      * @param [object] $request
