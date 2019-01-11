@@ -22,17 +22,10 @@ class UpdateStatus extends Controller
     public function __destruct()
     {}
 
-    /**
-     * @method $index
-     * @param [object] $request
-     * @param [object] $response
-     * @param [array] $args
-     */
-
-
     public function index($request, $response, $args) 
     {
-		$messages = $this->soap_client_obj->getMessages();
+        $messages = $this->soap_client_obj->getMessages();
+        $filtered_arr = array();
 
 		foreach ($messages as $message) {
 
@@ -40,38 +33,24 @@ class UpdateStatus extends Controller
 
             $parsedMessage = $this->xml_parser->getParsedData();
 
-            print_r($parsedMessage);
-
+            
             if($parsedMessage['GROUPID'] === '18-3110-AM')
             {
-               $validator = new Validator($parsedMessage);
-               $status = $validator->validateStatus();
-               $this->circuit_board_dbh->updateBoardStatus('447817814149', $status);
-              
-            } else {
-                echo 'NULL';
+               $filtered_arr = $parsedMessage;
             }
 
-        
-           
-                // try{
-                // $msisdn = $validator->validateMSISDN();
-                // } catch(Exception $e)
-                // {
+            $validator = new Validator($filtered_arr);
+            try 
+            {
+                $msisdn = $validator->validateMSISDN();
+                $status = $validator->validateStatus();
+                $this->circuit_board_dbh->updateBoardStatus($msisdn, $status);
 
-                // }
-                
-                
-                
-
-				// $information = $database->queryBoardInformation($msisdn);
-
-				// $update = new CircuitBoard($information, $status);
-
-                
-                
-				// $this->model->addUpdate($update);
-			
+            } catch(Exception $e)
+            {
+                continue;
+            }
+               
         }
         
         return $response->withRedirect('/soap_app/app');
