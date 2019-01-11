@@ -17,32 +17,6 @@ class CircuitBoardDbh
         $this->db = $container->get('Database');
     }
 
-
-    public function queryAllBoardInformation()
-	{
-		$statement = $this->database->prepare('SELECT * FROM board_info');
-
-		if ($statement === false) {
-			throw new PrepareStatementException(__FUNCTION__);
-		}
-
-		if ($statement->execute() == false) {
-			throw new ExecuteStatementException(__FUNCTION__);
-		}
-
-		$boards = array();
-
-		foreach ($statement as $boardInformation) {
-			$msisdn = $boardInformation['msisdn'];
-			$name = $boardInformation['name'];
-			$information = new CircuitBoardInformation($msisdn, $name);
-
-			array_push($boards, $information);
-		}
-
-		return $boards;
-	}
-
     public function updateBoardStatus($msisdn, $status)
     {
 		$query = 'UPDATE board_status SET switchOne = :switchOne, switchTwo = :switchTwo,
@@ -61,14 +35,14 @@ class CircuitBoardDbh
 			$this->db->bind(':fan', $status->getFan(), 'STR');
 			$this->db->bind(':keypad', $status->getKeypad(), 'INT');
 			$this->db->bind(':temperature', $status->getTemperature(), 'INT');
-			$this->db->bind(':date', $status->getDate(), 'INT');
+			$this->db->bind(':date', $status->getDate()->format(DB_DATE_FORMAT), 'STR');
 			$this->db->bind(':id', 3, 'INT');
 			$this->db->bind(':msisdn', $msisdn, 'STR');
 			
 			$this->db->execute();
 
 
-		} catch (Exception $e) 
+		} catch (PDOException $e) 
 		{
 			//Throw Exception
 			
@@ -90,7 +64,9 @@ class CircuitBoardDbh
 
 			$result = $this->db->getSingleData();
 
-			$date = $result['date'];
+			$format_date = DateTime::createFromFormat(DB_DATE_FORMAT, $result['date']);
+			
+			$date = $format_date->format(DB_DATE_FORMAT);
 			$switchOne = $result['switchOne'];
 			$switchTwo = $result['switchTwo'];
 			$switchThree = $result['switchThree'];
@@ -107,14 +83,10 @@ class CircuitBoardDbh
 			return $status;
 
 		}
-		catch (Exception $e)
+		catch (PDOException $e)
 		{
 			echo $e->Message();
 		}
     } 
 
-	public function fetchNotification()
-	{
-
-	}
 }

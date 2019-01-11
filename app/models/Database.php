@@ -82,6 +82,9 @@ class Database
             case 'STR':
             $param_type = PDO::PARAM_STR;
             break;
+            case 'DATE':
+            $param_type = PDO::PARAM_STR;
+            break;
             default:
             $param_type = PDO::PARAM_STR;
         }
