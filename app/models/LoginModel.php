@@ -34,6 +34,11 @@ class LoginModel
     private $db;
 
 
+    private $password_not_matched;
+
+    private $is_user_not_found;
+
+
 
 
     public function __construct()
@@ -42,11 +47,14 @@ class LoginModel
        $this->password = false;
        $this->db = null;
 
+       $this->password_not_matched = false;
+       $this->is_user_not_found = false;
+
     }
 
     /**
      * Handles the login process
-     * @return Object $user
+     * @return Object 
      * @param string $username user username
      * @param string $password user password
      * @param Object $db database object
@@ -58,24 +66,36 @@ class LoginModel
         $this->password = $password;
         $this->db = $db;
 
+        $is_password_correct = false;
+
         $user = null;
 
-        $query = 'SELECT * FROM users WHERE password = :password AND username = :username';
+        $query = 'SELECT * FROM users WHERE username = :username';
 
         try
         {
             $this->db->prepare($query);
             $this->db->bind(':username', $this->username, 'STR');
-            $this->db->bind(':password', $this->password, 'STR');
             $this->db->execute();
 
             $results = $this->db->getSingleData();
 
-            if(!$results < 0) 
+            if($results < 0) 
             {
-                echo "No records found"; 
+                $this->is_user_not_found = true;
+
+                return;
+
             } 
-            
+
+            $is_password_correct = password_verify($this->password, $results['password']);
+           
+            if(!$is_password_correct)
+            {
+                $this->password_not_matched = true;
+                return;
+            }
+ 
             $result_username = filter_var($results['username'],  FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
             $result_password = filter_var($results['password'],  FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
@@ -83,10 +103,20 @@ class LoginModel
 
             return $user;
             
-        } catch(Exception $e)
+        } catch(PDOException $e)
         {
             //Throw Exception
         }
         
+    }
+
+    public function passwordNotMatchedInDatabase()
+    {
+        return $this->password_not_matched;
+    }
+
+    public function userNotFoundInDatabase()
+    {
+        return $this->is_user_not_found;
     }
 }

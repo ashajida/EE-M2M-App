@@ -82,10 +82,10 @@ class LoginController extends Controller
     {
        
   
-    //    if(isset($_SESSION['user_name']))
-    //    {
-    //     return $response->withRedirect('/soap_app/app'); 
-    //    }
+       if(isset($_SESSION['user_name']))
+       {
+        return $response->withRedirect('/soap_app/app'); 
+       }
 
         return $this->view->render($response, 'Login.twig', [
             'password_err' => $this->password_error,
@@ -114,10 +114,22 @@ class LoginController extends Controller
             ]);
         }
 
-        $username = $this->login_validator->validateString($request->getParam('username'));
-        $password = $this->login_validator->validateString($request->getParam('password'));
+        $username = $this->string_validator->validateString($request->getParam('username'));
+        $password = $this->string_validator->validateString($request->getParam('password'));
 
         $user = $this->login->loginUser($username, $password, $this->db);
+        $password_matched_error = $this->login->passwordNotMatchedInDatabase();
+        $user_not_found_error = $this->login->userNotFoundInDatabase();
+
+        if($password_matched_error)
+        {
+            return $this->view->render($response, 'Login.twig', [
+                'password_err'          => $this->password_error,
+                'username_err'          => $this->username_error,
+                'password_match_err'    => $password_matched_error,
+                'user_not_found_err'    => $user_not_found_error
+            ]);
+        }
 
         $this->session_model->setSessionValues($user->getUsername(), $user->getPassword());
         $this->session_model->setWrapperSessionFile($this->session_wrapper);
