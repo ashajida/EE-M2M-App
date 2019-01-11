@@ -1,27 +1,21 @@
-const DOM = (() => {
-  let message_box = document.querySelector(".messagebox");
-  return {
-    message_box
-  };
-})();
+const init = (function () {
 
-const UI = (() => {
-  return {};
-})();
+  // responsive menu function
+  const burgerMenu = () => {
+    let burger = document.querySelector(".burger");
+    let navBar = document.querySelector(".links");
 
-const app = ((DOMElement, UIcontroller) => {
-  fetch("http://localhost/soap_app/app/index.php/messages")
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      let res_data = data.forEach(data => {
-        return data;
+    //responsive menu button
+    if (burger && navBar) {
+      burger.addEventListener("click", function () {
+        navBar.classList.toggle("active");
+        burger.classList.toggle("toggle");
       });
+    } else {
+      return;
+    }
+  };
 
-      document.querySelector(".messagebox").innerHTML += `<p>${data}</p>`;
-      console.log(data);
-    });
+  burgerMenu();
 
-  return {};
-})(DOM, UI);
+})();

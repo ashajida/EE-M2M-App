@@ -26,12 +26,26 @@ body {
   overflow: hidden;
 }
 
-nav {
+
+nav .links {
   display: flex;
   flex-direction: column;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
 }
 
-nav a,
+.logo {
+  margin-bottom: 1em;
+}
+
+
+.logo span {
+  border: none;
+  display: inline;
+}
+
+nav .links a,
 span {
   text-decoration: none;
   color: #e4e4e4;
@@ -39,27 +53,60 @@ span {
   margin-bottom: 18px;
   padding-bottom: 14px;
   border-bottom: 1px solid #ffffff;
+  display: block;
+  text-align: left;
 }
 
-nav a:hover {
+
+.links a:active {
+  color: var(--theme-color);
+}
+
+.links a:hover {
+  color: var(--theme-color);
+}
+
+nav .burger {
+  padding: 1em 0 1em 0;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 21px;
+  cursor: pointer;
+}
+
+.burger div {
+  display: block;
+  margin-bottom: 6px;
+  height: 3px;
+  width: 25px;
+  background-color: #f1f1f1;
+  transition: transform 0.3s ease-in;
+}
+
+nav .links.active {
+  height: 150px;
+}
+
+.toggle .line-1 {
+  transform: rotate(-45deg) translate(-7px, 6px);
+}
+
+.toggle .line-2 {
+  opacity: 0;
+}
+
+.toggle .line-3 {
+  transform: rotate(45deg) translate(-7px, -6px);
+}
+
+
+
+nav .links a:hover {
   color: #bbbbbb;
 }
 
-ul {
-  list-style: none;
-}
 
-ul li {
-  display: block;
-}
-
-li :hover ul {
-  display: block;
-}
-
-li .drop-down {
-  display: none;
-}
 
 header {
   background-color: #222222;
@@ -201,13 +248,20 @@ h3 {
 
 
 @media (min-width: 500px) {
+
   nav {
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
+    justify-content: space-between;
   }
 
-  nav a,
+  nav .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .links a,
   span {
     text-decoration: none;
     color: #e4e4e4;
@@ -215,6 +269,20 @@ h3 {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none;
+  }
+
+
+
+  .logo {
+    display: inline-block;
+  }
+
+  .links {
+    height: 100px;
+  }
+
+  .burger div {
+    display: none;
   }
 
   /* .device-status table {
