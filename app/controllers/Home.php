@@ -12,11 +12,13 @@ class Home extends Controller
 {
 
     private $session_wrapper;
+    private $libchart_wrapper;
 
     public function __construct($container)
     {
         parent::__construct($container);
         $this->session_wrapper = $container->get('SessionWrapper');
+        $this->libchart_wrapper = $container->get('LibchartWrapper');
     }
 
     public function __destruct()
@@ -30,19 +32,16 @@ class Home extends Controller
          return $response->withRedirect('/soap_app/app/login'); 
         }
 
-    $status = $this->circuit_board_dbh->getCircuitBoardStatus();
+        $status = $this->circuit_board_dbh->getCircuitBoardStatus();
 
-    include "../libchart/libchart/classes/libchart.php";
+        $chart_title = 'Temperature';
+        $data = $status->getTemperature();
+        $location = '../public/images/temp.png';
+        $main_title = 'Temperature Chart';
 
-    $chart = new VerticalBarChart(500, 250);
-    
-    $dataSet = new XYDataSet();
-	$dataSet->addPoint(new Point("Temperature", $status->getTemperature()));
-    
-    $chart->setDataSet($dataSet);
-
-    $chart->setTitle("Device status bar chart");
-	$chart->render("../public/images/temp.png");
+        $this->libchart_wrapper->setChartData($chart_title, $data);
+        $this->libchart_wrapper->setTitle($main_title);
+        $this->libchart_wrapper->render($location);
 
         return $this->view->render($response, 'status.twig',[
             'keypad'        => $status->getKeypad(),

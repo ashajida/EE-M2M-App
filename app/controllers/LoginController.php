@@ -53,11 +53,26 @@ class LoginController extends Controller
      * @var SessionWrapper
      */
     private $session_wrapper;
-
+    
+    /**
+     * this variable gives a flag if their is an error with username input
+     *
+     * @var bool
+     */
     private $username_error;
 
+    /**
+     * this variable gives a flag if their is an error with password input
+     *
+     * @var bool
+     */
     private $password_error;
 
+    /**
+     * this variable gives a flag if their is an error with the length of password input
+     *
+     * @var bool
+     */
     private $password_count_error;
 
     public function __construct($container)
@@ -147,14 +162,14 @@ class LoginController extends Controller
                 'username_err'          => $this->username_error,
                 'password_match_err'    => $password_matched_error,
                 'user_not_found_err'    => $user_not_found_error,
-                'title'        => APP_NAME,
-                'css'          => './views/css/styles.css',
-                'js'           => 'js/app.js',
-                'chart'        => '../public/images/temp.png',
-                'action'       => 'login',
-                'home'         => 'index.php',
-                'update'       => 'index.php/update',
-                'logout'       => 'logout'
+                'title'                 => APP_NAME,
+                'css'                   => './views/css/styles.css',
+                'js'                    => 'js/app.js',
+                'chart'                 => '../public/images/temp.png',
+                'action'                => 'login',
+                'home'                  => 'index.php',
+                'update'                => 'index.php/update',
+                'logout'                => 'logout'
             ]);
         }
 

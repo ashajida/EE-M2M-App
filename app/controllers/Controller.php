@@ -1,11 +1,38 @@
 <?php
 
+/**
+ * abstract Controller class
+ * @author Ashraf Ajida 
+ */
+
 class Controller
 {
+    /**
+     * Twig templating
+     * @var Twig
+     */
     protected $view;
-    protected $soap_client_obj = null;
+
+    /**
+     * soap client for m2m
+     *
+     * @var SoapClient
+     */
+    protected $soap_client_obj;
+
+    /**
+     * circuit board database handle, handles all the query to the database
+     *
+     * @var CicuitBoardDbh
+     */
     protected $circuit_board_dbh;
-    protected $xml_parser = null;
+
+    /**
+     * parses the xml array to the xmlParser
+     *
+     * @var XmlParser
+     */
+    protected $xml_parser;
 
     public function __construct($container)
     {

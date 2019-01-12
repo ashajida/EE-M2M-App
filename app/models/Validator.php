@@ -2,7 +2,7 @@
 
 /**
  * Validates raw XML formatted SMS messages.
- * @author Michael
+ * @author Ashraf Ajida
  */
 final class Validator
 {
