@@ -24,7 +24,7 @@ class UpdateStatus extends Controller
 
     public function index($request, $response, $args) 
     {
-        $count = 30;
+        $count = 180;
 
         $messages = $this->soap_client_obj->getMessages(M2M_USERNAME, M2M_PASSWORD, $count);
         $filtered_arr = array();
@@ -33,29 +33,57 @@ class UpdateStatus extends Controller
 
             $this->xml_parser->parse($message);
 
-            $parsedMessage = $this->xml_parser->getParsedData();
+            $parsed_message = $this->xml_parser->getParsedData();
 
-            
-            if($parsedMessage['GROUPID'] === '18-3110-AM')
+            if($parsed_message['GROUPID'])
             {
-               $filtered_arr = $parsedMessage;
+                if($parsed_message['GROUPID'] === '18-3110-AM')
+                {
+                    $filtered_arr = $parsed_message;
+                }
             }
+
 
             $validator = new Validator($filtered_arr);
-            try 
-            {
-                $msisdn = $validator->validateMSISDN();
-                $status = $validator->validateStatus();
-                $this->circuit_board_dbh->updateBoardStatus($msisdn, $status);
 
-            } catch(Exception $e)
-            {
-                continue;
-            }
+            $status = $validator->validateStatus();
+                
+            $this->circuit_board_dbh->updateBoardStatus(M2M_MSISDN, $status); 
+            
+
+            //send a message that a new update has been recieved
                
         }
         
         return $response->withRedirect('/soap_app/app');
 
+    }
+
+private function fetchDeliveryReport($msisdn, $date_time)
+    {
+        $delivery_report = $this->soap_client_obj->getDeliveryReport(M2M_USERNAME, M2M_PASSWORD, $msisdn, $date_time);
+        $sendMessage = null;
+        $message = false;
+
+        foreach ($delivery_report as $message) {
+
+            $this->xml_parser->parse($message);
+
+            $parsedMessage = $this->xml_parser->getParsedData();
+
+            print_r($message);
+
+            $message = "<msg>message delivered</msg>";
+            $sendMessage = $this->soap_client_obj->sendMessage(M2M_USERNAME, M2M_PASSWORD, $msisdn, $message);
+
+            if($parsedMessage['GROUPID'])
+            {
+                if($parsedMessage['GROUPID'] === '18-3110-AM')
+                {
+                    $message = "<msg>message delivered</msg>";
+                    $sendMessage = $this->soap_client_obj->sendMessage(M2M_USERNAME, M2M_PASSWORD, $msisdn, $message);
+                }
+            }
+        }
     }
 }
