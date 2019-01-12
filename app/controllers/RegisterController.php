@@ -81,7 +81,15 @@ class RegisterController extends Controller
         return $this->view->render($response, 'register.twig', [
             'password_err'          => $this->password_error,
             'username_err'          => $this->username_error,
-            'password_count_err'    => $this->password_count_error
+            'password_count_err'    => $this->password_count_error,
+            'title'                 => APP_NAME,
+            'css'                   => './views/css/styles.css',
+            'js'                    => 'js/app.js',
+            'action'                => 'logout',
+            'home'                  => 'index.php',
+            'update'                => 'index.php/update',
+            'logout'                => 'logout'
+
         ]);
     }
 
@@ -104,7 +112,14 @@ class RegisterController extends Controller
                 'password_err'          => $this->password_error,
                 'username_err'          => $this->username_error,
                 'password_count_err'    => $this->password_count_error,
-                'doublicated_user_err'  => false
+                'doublicated_user_err'  => false,
+                'title'                 => APP_NAME,
+                'css'                   => './views/css/styles.css',
+                'js'                    => 'js/app.js',
+                'action'                => 'logout',
+                'home'                  => 'index.php',
+                'update'                => 'index.php/update',
+                'logout'                => 'logout'
             ]);
         }
 
@@ -121,7 +136,14 @@ class RegisterController extends Controller
                 'password_err'          => $this->password_error,
                 'username_err'          => $this->username_error,
                 'password_count_err'    => $this->password_count_error,
-                'doublicated_user_err'  => $validate_user_in_database
+                'doublicated_user_err'  => $validate_user_in_database,
+                'title'                 => APP_NAME,
+                'css'                   => './views/css/styles.css',
+                'js'                    => 'js/app.js',
+                'action'                => 'logout',
+                'home'                  => 'index.php',
+                'update'                => 'index.php/update',
+                'logout'                => 'logout'
             ]);
         }
 

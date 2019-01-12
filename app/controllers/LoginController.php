@@ -92,7 +92,15 @@ class LoginController extends Controller
 
         return $this->view->render($response, 'Login.twig', [
             'password_err' => $this->password_error,
-            'username_err' => $this->username_error
+            'username_err' => $this->username_error,
+            'title'        => APP_NAME,
+            'css'          => './views/css/styles.css',
+            'js'           => 'js/app.js',
+            'chart'        => '../public/images/temp.png',
+            'action'       => 'login',
+            'home'         => 'index.php',
+            'update'       => 'index.php/update',
+            'logout'       => 'logout'
         ]);
     }
 
@@ -113,7 +121,15 @@ class LoginController extends Controller
         {
             return $this->view->render($response, 'Login.twig', [
                 'password_err' => $this->password_error,
-                'username_err' => $this->username_error
+                'username_err' => $this->username_error,
+                'title'         => APP_NAME,
+                'css'           => './views/css/styles.css',
+                'js'            => 'js/app.js',
+                'chart'         => '../public/images/temp.png',
+                'action'        => 'login',
+                'home'          => 'index.php',
+                'update'        => 'index.php/update',
+                'logout'        => 'logout'
             ]);
         }
 
@@ -130,7 +146,15 @@ class LoginController extends Controller
                 'password_err'          => $this->password_error,
                 'username_err'          => $this->username_error,
                 'password_match_err'    => $password_matched_error,
-                'user_not_found_err'    => $user_not_found_error
+                'user_not_found_err'    => $user_not_found_error,
+                'title'        => APP_NAME,
+                'css'          => './views/css/styles.css',
+                'js'           => 'js/app.js',
+                'chart'        => '../public/images/temp.png',
+                'action'       => 'login',
+                'home'         => 'index.php',
+                'update'       => 'index.php/update',
+                'logout'       => 'logout'
             ]);
         }
 

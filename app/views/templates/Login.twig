@@ -15,7 +15,7 @@
                         {{ password_match_err ? '<p class="primary-error">*Incorrect assword or username, please try again</p>' : '' }}
                         {{ user_not_found_err ? '<p class="primary-error">*Incorrect password or username, please try again</p>' : '' }}
                     </div>
-                    <form action="login" method="post">
+                    <form action="{{ action }}" method="post">
                         <label for="username">Username:{{ username_err ? '<p class="error">*Please fill in username</p>' : ''}}</label></br>
                         <input type="text" name="username" id="username" placeholder="Username"></input></br>
                         <label for="password">Password:

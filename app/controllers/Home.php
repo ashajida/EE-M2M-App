@@ -30,7 +30,19 @@ class Home extends Controller
          return $response->withRedirect('/soap_app/app/login'); 
         }
 
-        $status = $this->circuit_board_dbh->getCircuitBoardStatus();
+    $status = $this->circuit_board_dbh->getCircuitBoardStatus();
+
+    include "../libchart/libchart/classes/libchart.php";
+
+    $chart = new VerticalBarChart(500, 250);
+    
+    $dataSet = new XYDataSet();
+	$dataSet->addPoint(new Point("Temperature", $status->getTemperature()));
+    
+    $chart->setDataSet($dataSet);
+
+    $chart->setTitle("Device status bar chart");
+	$chart->render("../public/images/temp.png");
 
         return $this->view->render($response, 'status.twig',[
             'keypad'        => $status->getKeypad(),
@@ -41,7 +53,14 @@ class Home extends Controller
             's3'            => $status->getSwitchThree(),
             's4'            => $status->getSwitchFour(),
             'last_updated'  => $status->getDate(),
-            'username'      => $_SESSION['user_name']
+            'username'      => $_SESSION['user_name'],
+            'title'         => APP_NAME,
+            'css'           => './views/css/styles.css',
+            'js'            => 'js/app.js',
+            'chart'         => '../public/images/temp.png',
+            'home'          => 'index.php',
+            'update'        => 'index.php/update',
+            'logout'        => 'logout'
         ]);
         
     }
