@@ -22,8 +22,13 @@ body {
 /*Device Status*/
 .device-status {
   width: 100%;
-  background-color: aqua;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.status {
+  width: 100%;
 }
 
 nav .links {
@@ -242,6 +247,19 @@ h3 {
   font-size: 2em;
 }
 
+h1 {
+  margin-bottom: 1em;
+}
+
+.img-wrapper {
+  width: 400px;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 280px;
+}
+
 @media (min-width: 500px) {
   nav {
     display: flex;
@@ -280,6 +298,16 @@ h3 {
     text-align: center;
     padding: 1em;
   } */
+
+  .device-status {
+    width: 100%;
+    overflow: hidden;
+    flex-direction: row;
+  }
+
+  .status {
+    width: 45%;
+  }
 
   .form-group {
     margin: 0 auto;

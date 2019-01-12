@@ -2,7 +2,7 @@
 {% block body %}
     <section>
     <div class="container">
-        <div class="col">
+        <h1>Device Status</h1>
             <div class="device-status">
                 <div class="status">
                     <table>
@@ -32,8 +32,10 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="img-wrapper">
+                     <img alt="temperature chart" src="{{ chart }}">
+                </div>
             </div>
-        </div>
     </div>
     </section>
 {% endblock %}

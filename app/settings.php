@@ -4,7 +4,6 @@ require __DIR__ . '/controllers/home.php';
 require __DIR__ . '/controllers/LoginController.php';
 require __DIR__ . '/controllers/LogoutController.php';
 require __DIR__ . '/controllers/RegisterController.php';
-require __DIR__ . '/controllers/status.php';
 require __DIR__ . '/controllers/UpdateStatus.php';
 require __DIR__ . '/models/M2mConsumer.php';
 require __DIR__ . '/models/database.php';
@@ -64,6 +63,8 @@ define('DATE_FORMAT', 'd/m/Y H:i:s');
 define('DB_DATE_FORMAT', 'Y-m-d H:i:s');
 
 define('M2M_MSISDN', '447817814149');
+
+define('APP_NAME', 'EE-M2M');
 
 
 
