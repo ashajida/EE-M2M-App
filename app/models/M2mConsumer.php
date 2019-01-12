@@ -30,8 +30,15 @@ class M2MConsumer
      */
     public function createSoapClient($wsdl, $options)
     {
+        try {
+
+            return $this->client_obj = new SoapClient($wsdl, $options);
+
+        } catch(SoapFault $fault)
+        {
+            //Throw Exception
+        }
         
-        return $this->client_obj = new SoapClient($wsdl, $options);
 
     }
 
@@ -40,14 +47,11 @@ class M2MConsumer
      * @param string $username this is the username for the M2M sever
      * @param string $password this is the password for the M2M server
      * @param int $count this is the limit of return message from m2m
+     * @return array
      */
 
-    public function getMessages($username = null, $password = null, $count = null)
+    public function getMessages($username, $password, $count)
     {
-        $username = '18p2401696';
-        $password = 'Myee2010';
-        $count = 30;
-
         return $this->client_obj->peekMessages( 
             $username, 
             $password,

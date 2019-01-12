@@ -15,6 +15,7 @@ require __DIR__ . '/models/LoginModel.php';
 require __DIR__ . '/models/RegisterModel.php';
 require __DIR__ . '/models/SessionWrapper.php';
 require __DIR__ . '/models/SessionModel.php';
+require __DIR__ . '/models/LibchartWrapper.php';
 
 
 $configuration = [
@@ -55,6 +56,10 @@ define('DBNAME', $db_name);
 define('USERNAME', $db_username);
 define('PASSWORD', $db_password);
 define('WSDL', $wsdl);
+
+define('M2M_USERNAME', '18p2401696');
+define('M2M_PASSWORD', 'Myee2010');
+
 
 define('SMS_IDENTIFIER', 'abc123'); 
 
@@ -141,6 +146,11 @@ $container['LoginModel'] = function ($container) {
 $container['RegisterModel'] = function ($container) {
     return new RegisterModel($container);
 };
+
+$container['LibchartWrapper'] = function ($container) {
+    return new LibchartWrapper($container);
+};
+
 
 
 

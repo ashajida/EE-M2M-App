@@ -24,7 +24,9 @@ class UpdateStatus extends Controller
 
     public function index($request, $response, $args) 
     {
-        $messages = $this->soap_client_obj->getMessages();
+        $count = 30;
+
+        $messages = $this->soap_client_obj->getMessages(M2M_USERNAME, M2M_PASSWORD, $count);
         $filtered_arr = array();
 
 		foreach ($messages as $message) {
@@ -54,19 +56,6 @@ class UpdateStatus extends Controller
         }
         
         return $response->withRedirect('/soap_app/app');
-
-      
-        $validated_country = false;
-        $validated_detail = false;
-        $country_detail_result = false;
-    
-        $arr_tainted_params = $request->getParsedBody();
-        $validator = $this->get('validator');
-        $db_handle = $this->get('dbase');
-        $sql_queries = $this->get('sql_queries');
-        $wrapper_mysql = $this->get('mysql_wrapper');
-        $companydetails_model = $this->get('companydetails_model');
-        $companydetailschart_model = $this->get('companydetailschart_model');
 
     }
 }
