@@ -52,12 +52,41 @@ class M2MConsumer
 
     public function getMessages($username, $password, $count)
     {
-        return $this->client_obj->peekMessages( 
-            $username, 
-            $password,
-            $count
-        );
-    
+        return $this->client_obj->peekMessages($username, $password,$count);
+    }
+
+    /**
+     * gets delivery report from m2m server
+     *
+     * @param string $username
+     * @param string $password
+     * @param string $msisdn
+     * @param string $country_code
+     * @param string $date
+     * @param DateTime $time
+     * @return array
+     */
+    public function getDeliveryReport($username, $password, $msisdn, $country_code, $date, $time)
+    {
+        return $this->client_obj->getDeliveryReportsFromDate($username, $password,
+        $msisdn,
+        $country_code,
+        $date,
+        $time);
+    }
+
+    /**
+     * sends a message to a chosen msisdn
+     *
+     * @param string $username
+     * @param string $password
+     * @param string $msisdn
+     * @param string $message
+     * @return method
+     */
+    public function sendMessage($username, $password, $msisdn, $message)
+    {
+        return $this->client_obj->sendMessage($username, $password, $msisdn, $message); 
     }
     
 }
