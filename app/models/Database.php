@@ -51,15 +51,14 @@ class Database
 
     }
 
-    public function update($query)
+    public function prepare($query = null)
     {
-        $this->stmt = $this->dbh->prepare($query);
-    }
+        if(empty($query))
+        {
+            throw new PDOException('Please parse query');
+        }
 
-    public function prepare($query)
-    {
-        $this->stmt = $this->dbh->prepare($query);
-        
+        $this->stmt = $this->dbh->prepare($query);  
     }
 
     public function execute()
