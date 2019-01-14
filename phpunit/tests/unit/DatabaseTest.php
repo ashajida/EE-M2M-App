@@ -47,12 +47,12 @@ class DatabaseTest extends TestCase
         $this->assertArrayHasKey('temperature', $result);
 
         $expected_arr = [
-            'switchOne' => 'OFF',
+            'switchOne' => 'ON',
             'switchTwo' => 'OFF',
-            'switchThree' => 'ON',
+            'switchThree' => 'OFF',
             'switchFour' => 'ON',
-            'Fan'  => 'FORWARD',
-            'temperature' => 20,
+            'fan'  => 'FORWARD',
+            'temperature' => 21,
             'date' => '2019-01-12 17:19:06',
             'keypad' => 3,
             'id' => 3,
