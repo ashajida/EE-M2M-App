@@ -33,4 +33,4 @@ class FormValidatorTest extends TestCase
         $validate_password_len = $this->form_validator->validatePasswordLength($string);
         $this->assertContains(false, [$validate_password_len]);
     }
-}
+} 
