@@ -56,14 +56,14 @@ final class CircuitBoardStatus
 
 	/**
 	 * Creates a new {@link CircuitBoardStatus}.
-	 * @param $date DateTime The date.
-	 * @param $switchOne string The status of switch one.
-	 * @param $switchTwo string The status of switch two.
-	 * @param $switchThree string The status of switch three.
-	 * @param $switchFour string The status of switch four.
-	 * @param $fan string The status of the fan.
-	 * @param $temperature int The temperature.
-	 * @param $keypad int The number on the keypad.
+	 * @param DateTime $date DateTime The date.
+	 * @param string $switchOne string The status of switch one.
+	 * @param string $switchTwo string The status of switch two.
+	 * @param string $switchThree string The status of switch three.
+	 * @param string $switchFour string The status of switch four.
+	 * @param string $fan string The status of the fan.
+	 * @param int $temperature int The temperature.
+	 * @param int $keypad int The number on the keypad.
 	 */
 	public function __construct($date, $switchOne, $switchTwo, $switchThree, $switchFour, $fan, $temperature, $keypad)
 	{
